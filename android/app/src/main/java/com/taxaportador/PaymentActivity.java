@@ -1,7 +1,6 @@
 package com.taxaportador;
 
 
-import android.app.Activity;
 import android.util.Log;
 
 import java.math.BigDecimal;
@@ -20,6 +19,8 @@ public class PaymentActivity  implements PaymentClient.PaymentCallback {
 
     public void doExecute() {
 
+      Log.e("entrou na funçãooooo", "bem vindo gabriel");
+
         try {
 
         PaymentRequest request = new PaymentRequest();
@@ -32,9 +33,9 @@ public class PaymentActivity  implements PaymentClient.PaymentCallback {
 
 
             paymentClient.startPayment(request, this);
-            Log.e("", "deu certo gabriel");
+
         } catch (Exception e) {
-            Log.e("a", e.getMessage());
+            Log.e("deu erro ", e.getMessage());
         }
 
 
