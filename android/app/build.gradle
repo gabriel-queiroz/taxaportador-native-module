@@ -143,6 +143,8 @@ dependencies {
     implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
     implementation "com.facebook.react:react-native:+"  // From node_modules
     compile(name:'payments-api-1.0.10', ext:'aar')
+    annotationProcessor(name: 'parceler-1.1.6', ext: 'jar')
+    compile(name: 'parceler-api-1.1.6', ext: 'jar')
 
 }
 

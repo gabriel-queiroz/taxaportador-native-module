@@ -30,7 +30,7 @@ allprojects {
             url "$rootDir/../node_modules/react-native/android"
         }
         flatDir {
-            dirs 'aars'
+          dirs 'aars', 'libs'
         }
     }
 }
