@@ -4,6 +4,9 @@ import '~/config/ReactotronConfig';
 
 import Routes from '~/routes';
 
-const App = () => <Routes />;
+const App = () => {
+ // NativeModules.DevMenu.show();
+  return <Routes />;
+};
 
 export default App;

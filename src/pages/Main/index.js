@@ -14,7 +14,7 @@ const Main = () => {
     <Container>
       <Touchable onPress={() => handleClick()}>
         <TouchableContent>
-          <TouchableText>Abrir Toast</TouchableText>
+          <TouchableText>Abrir AAAA</TouchableText>
         </TouchableContent>
       </Touchable>
     </Container>

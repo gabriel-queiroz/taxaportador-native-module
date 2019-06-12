@@ -1,38 +1,77 @@
 package com.taxaportador;
 
 
+import android.content.pm.PackageManager;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
-import java.math.BigDecimal;
+import com.facebook.react.bridge.ReactContext;
 
-import br.com.phoebus.android.payments.api.ApplicationInfo;
-import br.com.phoebus.android.payments.api.Credentials;
+import java.util.LinkedList;
+import java.util.List;
+
 import br.com.phoebus.android.payments.api.ErrorData;
+import br.com.phoebus.android.payments.api.Payment;
 import br.com.phoebus.android.payments.api.PaymentClient;
 import br.com.phoebus.android.payments.api.PaymentRequest;
+import br.com.phoebus.android.payments.api.PaymentType;
+import br.com.phoebus.android.payments.api.client.Client;
 
-
-
-public class PaymentActivity  implements PaymentClient.PaymentCallback {
+public class PaymentActivity  extends AppCompatActivity {
 
     private PaymentClient paymentClient = new PaymentClient();
 
-    public void doExecute() {
+    private List<PaymentType> paymentTypes = new LinkedList<PaymentType>();
 
-      Log.e("entrou na funçãooooo", "bem vindo gabriel");
+
+  private void doBind(ReactContext context) {
+    this.paymentClient.bind(context, new Client.OnConnectionCallback() {
+      @Override
+      public void onConnected()
+      {
+
+        Log.e("Erorr","desconectado");
+      }
+
+      @Override
+      public void onDisconnected(boolean forced) {
+
+        Log.e("Erorr","conectado");
+      }
+    });
+  }
+
+    public void doExecute(ReactContext context) {
+
+      doBind(context);
+      this.paymentTypes.add(PaymentType.CREDIT_STORE);
+
+      final PaymentRequest pr;
+      try {
+        pr = new PaymentRequest()
+          .withValue(DataTypeUtils.getFromString("1000"))
+          .withAppTransactionId("123456")
+          .withPaymentTypes(this.paymentTypes)
+          .withApplicationInfo(CredentialsUtils.getMyAppInfo())
+          .withShowReceiptView(true);
+      } catch (PackageManager.NameNotFoundException e) {
+        Log.e("ERROR", e.getMessage());
+        return;
+      }
 
         try {
 
-        PaymentRequest request = new PaymentRequest();
-        request.setValue(new BigDecimal(50));
-        request.setAppTransactionId("123456");
-        ApplicationInfo appInfo = new ApplicationInfo();
-        appInfo.setCredentials(new Credentials());
-        appInfo.setSoftwareVersion("1.0.0.0");
-        request.setAppInfo(appInfo);
+          this.paymentClient.startPayment(pr, new PaymentClient.PaymentCallback<Payment>() {
+            @Override
+            public void onSuccess(Payment data) {
+              Log.e("SUCESS", "Pagamento Realizado!");
 
-
-            paymentClient.startPayment(request, this);
+            }
+            @Override
+            public void onError(ErrorData errorData) {
+              Log.e("Erorr",  errorData.getResponseMessage());
+            }
+          });
 
         } catch (Exception e) {
             Log.e("deu erro ", e.getMessage());
@@ -41,13 +80,5 @@ public class PaymentActivity  implements PaymentClient.PaymentCallback {
 
     }
 
-    @Override
-    public void onSuccess(Object o) {
-
-    }
-
-    @Override
-    public void onError(ErrorData errorData) {
-
-    }
 }
+
