@@ -1,9 +1,8 @@
 import React from 'react';
 
 import ToastExample from '~/libs/Toast';
-import {
-  Container, Touchable, TouchableContent, TouchableText,
-} from './styles';
+import { Container } from './styles';
+import Form from '~/components/Form';
 
 const Main = () => {
   const handleClick = () => {
@@ -12,11 +11,7 @@ const Main = () => {
 
   return (
     <Container>
-      <Touchable onPress={() => handleClick()}>
-        <TouchableContent>
-          <TouchableText>Abrir AAAA</TouchableText>
-        </TouchableContent>
-      </Touchable>
+      <Form handleFormSubmit={handleClick} />
     </Container>
   );
 };

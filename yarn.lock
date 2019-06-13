@@ -5508,6 +5508,11 @@ react-lifecycles-compat@^3.0.4:
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
 
+react-native-dev-menu-on-touch@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/react-native-dev-menu-on-touch/-/react-native-dev-menu-on-touch-1.0.3.tgz#6ba4b746f3c7afed47ff5987d10261637ee94a19"
+  integrity sha512-djW6Omp87MMaUkdJr52uYyNK24E9dighKhemI7085P6KB3mC+ZDYJMBQA35byi6wd9PnZXAKgn8n/OkkdSz0qg==
+
 react-native-gesture-handler@^1.3.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-1.3.0.tgz#d0386f565928ccc1849537f03f2e37fd5f6ad43f"
