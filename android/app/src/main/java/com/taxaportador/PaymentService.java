@@ -1,12 +1,10 @@
 package com.taxaportador;
 
 
+import android.content.Context;
 import android.content.pm.PackageManager;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-
-import com.facebook.react.bridge.ReactContext;
-
+import com.facebook.react.ReactActivity;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -17,23 +15,28 @@ import br.com.phoebus.android.payments.api.PaymentRequest;
 import br.com.phoebus.android.payments.api.PaymentType;
 import br.com.phoebus.android.payments.api.client.Client;
 
-public class PaymentActivity  extends AppCompatActivity {
+class PaymentService {
 
     private PaymentClient paymentClient = new PaymentClient();
 
     private List<PaymentType> paymentTypes = new LinkedList<PaymentType>();
 
+    private Context context;
 
-  private void doBind(ReactContext context) {
-    this.paymentClient.bind(context, new Client.OnConnectionCallback() {
-      @Override
+    PaymentService(Context context){
+      this.context = context;
+    }
+
+  private void doBind() {
+    this.paymentClient.bind(this.context.getApplicationContext(), new Client.OnConnectionCallback() {
+
       public void onConnected()
       {
 
         Log.e("Erorr","desconectado");
       }
 
-      @Override
+
       public void onDisconnected(boolean forced) {
 
         Log.e("Erorr","conectado");
@@ -41,19 +44,21 @@ public class PaymentActivity  extends AppCompatActivity {
     });
   }
 
-    public void doExecute(ReactContext context) {
+    public void doPayment(double value, String transationId, boolean showReceiptView) {
 
-      doBind(context);
+      Log.e("CARREGADO", "foii");
+
+      doBind();
       this.paymentTypes.add(PaymentType.CREDIT_STORE);
 
       final PaymentRequest pr;
       try {
         pr = new PaymentRequest()
-          .withValue(DataTypeUtils.getFromString("1000"))
-          .withAppTransactionId("123456")
-          .withPaymentTypes(this.paymentTypes)
+          .withValue(DataTypeUtils.getFromString(Double.toString(value)))
+          .withAppTransactionId(transationId)
+          .withPaymentTypes(paymentTypes)
           .withApplicationInfo(CredentialsUtils.getMyAppInfo())
-          .withShowReceiptView(true);
+          .withShowReceiptView(showReceiptView);
       } catch (PackageManager.NameNotFoundException e) {
         Log.e("ERROR", e.getMessage());
         return;
@@ -76,8 +81,6 @@ public class PaymentActivity  extends AppCompatActivity {
         } catch (Exception e) {
             Log.e("deu erro ", e.getMessage());
         }
-
-
     }
 
 }

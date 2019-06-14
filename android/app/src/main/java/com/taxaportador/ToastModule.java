@@ -7,7 +7,9 @@ import com.facebook.react.bridge.ReactApplicationContext;
 
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
+import com.facebook.react.bridge.ReadableArray;
 
+import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 
@@ -34,10 +36,12 @@ public class ToastModule extends ReactContextBaseJavaModule {
     return constants;
   }
   @ReactMethod
-  public void show(String message, int duration) {
-    //Toast.makeText(getReactApplicationContext(), message, duration).show();
-    PaymentActivity payment = new PaymentActivity();
-    payment.doExecute(getReactApplicationContext());
+  public void show(String message, int duration, ReadableArray paymentsTypes) {
+    Toast.makeText(getReactApplicationContext(), message, duration).show();
+//    PaymentService payment = new PaymentService();
+//    payment.doPayment();
+//    paymentsTypes.toArrayList();
+
   }
 }
 

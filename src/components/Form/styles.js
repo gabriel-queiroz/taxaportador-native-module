@@ -1,5 +1,5 @@
-import styled from 'styled-components/native';
-import { TextInputMask } from 'react-native-masked-text'
+import styled, { css } from 'styled-components/native';
+import { TextInputMask } from 'react-native-masked-text';
 
 export const Container = styled.View`
   background: #ccc;
@@ -34,11 +34,23 @@ export const TouchableText = styled.Text`
   font-weight: bold;
 `;
 
-export const Input = styled(TextInputMask).attrs({
+export const InputMask = styled(TextInputMask).attrs({
   placeholderStyle: {
     fontSize: '10px',
   },
 })`
+  ${props => propertiesInput}
+`;
+
+export const Input = styled.TextInput.attrs({
+  placeholderStyle: {
+    fontSize: '10px',
+  },
+})`
+  ${props => propertiesInput}
+`;
+
+const propertiesInput = css`
   height: 50px;
   width: 100%;
   font-size: 15px;
