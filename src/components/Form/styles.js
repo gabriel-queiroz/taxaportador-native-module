@@ -4,8 +4,12 @@ import { TextInputMask } from 'react-native-masked-text';
 export const Container = styled.View`
   background: #ccc;
   justify-content: center;
+  align-items: center;
   flex: 1;
-  width: 90%;
+  padding: 0px 15px;
+`;
+
+export const Content = styled.View`
   align-items: center;
 `;
 
@@ -13,7 +17,7 @@ export const Title = styled.Text`
   font-size: 20px;
   font-weight: bold;
   color: #777777;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
 `;
 
 export const Touchable = styled.TouchableNativeFeedback``;

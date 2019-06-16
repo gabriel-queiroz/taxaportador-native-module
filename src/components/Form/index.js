@@ -2,6 +2,7 @@ import React, { useState, Component } from 'react';
 
 import {
   Container,
+  Content,
   Title,
   Touchable,
   TouchableContent,
@@ -9,7 +10,6 @@ import {
   Input,
   InputMask,
 } from './styles';
-import { FormatNumbers } from '~/helpers/formatNumber';
 
 const Form = ({ handleFormSubmit }) => {
   const [idCompra, setIdCompra] = useState('');
@@ -18,7 +18,12 @@ const Form = ({ handleFormSubmit }) => {
   return (
     <Container>
       <Title>Pagamentos</Title>
-      <Input placeholder="Id compra" value={idCompra} onChangeText={text => setIdCompra(text)} />
+      <Input
+        placeholder="Id compra"
+        keyboardType="numeric"
+        value={idCompra}
+        onChangeText={text => setIdCompra(text)}
+      />
       <InputMask
         type="money"
         ref={ref => setInputMoney(ref)}
