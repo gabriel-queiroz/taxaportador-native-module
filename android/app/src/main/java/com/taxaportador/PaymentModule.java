@@ -1,20 +1,26 @@
 package com.taxaportador;
 
 
+import android.content.Context;
+
+import com.facebook.react.bridge.Arguments;
+import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
-import com.facebook.react.bridge.ReadableArray;
+import com.facebook.react.bridge.WritableMap;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import br.com.phoebus.android.payments.api.PaymentType;
-
 
 public class PaymentModule extends ReactContextBaseJavaModule {
-    public PaymentModule(ReactApplicationContext reactContext) {
+
+  private Context context;
+
+  public PaymentModule(ReactApplicationContext reactContext) {
         super(reactContext);
+        this.context = reactContext;
     }
     @Override
     public String getName() {
@@ -27,8 +33,16 @@ public class PaymentModule extends ReactContextBaseJavaModule {
         return constants;
     }
     @ReactMethod
-    public void startPayment(double value, String transactionId, boolean showReceiptView) {
-        PaymentService payment = new PaymentService(this.getReactApplicationContext());
-        payment.doPayment(value, transactionId, showReceiptView);
+    public void startPayment(double value, String transactionId, boolean showReceiptView, Promise promise) {
+
+        try{
+          PaymentService payment = new PaymentService(this.getReactApplicationContext());
+          payment.doPayment(value, transactionId, showReceiptView, promise);
+
+        }
+        catch(Exception e){
+          promise.reject("error", e.getMessage());
+        }
     }
+
 }

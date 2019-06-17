@@ -2,18 +2,11 @@ import React from 'react';
 
 import { Container } from './styles';
 import Form from '~/components/Form';
-import Payment from '~/libs/Payment';
 
-const Main = () => {
-  const handleClick = (value, transationId) => {
-    Payment.startPayment(value, transationId, false);
-  };
-
-  return (
-    <Container>
-      <Form handleFormSubmit={handleClick} />
-    </Container>
-  );
-};
+const Main = () => (
+  <Container>
+    <Form />
+  </Container>
+);
 
 export default Main;
