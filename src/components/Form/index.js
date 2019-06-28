@@ -2,7 +2,6 @@ import React, { useState, Component } from 'react';
 
 import {
   Container,
-  Content,
   Title,
   Touchable,
   TouchableContent,
@@ -35,6 +34,7 @@ const Form = ({ handleFormSubmit }) => {
       } catch (error) {
         // alert('Aconteceu um erro ao pagar!');
         alert(error.toString());
+        console.tron.log(error);
       }
     } else {
       alert('identificador ou valor da compra não informado!');

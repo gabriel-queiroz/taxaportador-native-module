@@ -57,7 +57,7 @@ class PaymentService extends AppCompatActivity {
       Log.e("CARREGADO", "foii");
 
       doBind(promise);
-      this.paymentTypes.add(PaymentType.CREDIT_STORE);
+      this.paymentTypes.add(PaymentType.CREDIT);
 
       final PaymentRequest pr;
       try {
@@ -66,7 +66,7 @@ class PaymentService extends AppCompatActivity {
           .withAppTransactionId(transationId)
           .withPaymentTypes(paymentTypes)
           .withApplicationInfo(CredentialsUtils.getMyAppInfo())
-          .withShowReceiptView(showReceiptView);
+          .withShowReceiptView(true);
       } catch (Exception e) {
         Log.e("error3", e.getMessage());
         promise.reject("error4", e.getMessage());
